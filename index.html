@@ -168,10 +168,9 @@
 
     <!-- Música -->
     <audio autoplay loop>
-    <source src="Lady_Gaga__Bruno_Mars_-_Die_With_A_Smile__Official_Music_Video__[_YouConvert.net_].mp3" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-</audio>
-
+        <source src="Lady_Gaga__Bruno_Mars_-_Die_With_A_Smile__Official_Music_Video__[_YouConvert.net_].mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
     <script>
         // Carrossel de Imagens
@@ -228,15 +227,9 @@
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
         }
-        setInterval(updateCounter, 1000);
 
-        // Forçar a música a tocar ao carregar
-        window.addEventListener("load", function() {
-            const audio = document.getElementById("background-music");
-            audio.muted = false;
-            audio.play();
-        });
+        setInterval(updateCounter, 1000); // Atualiza o contador a cada segundo
     </script>
-
 </body>
 </html>
+
