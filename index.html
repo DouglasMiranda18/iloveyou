@@ -1,188 +1,253 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3 Meses com Minha Namorada</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Configurações gerais */
         body {
             font-family: Arial, sans-serif;
-            color: #fff;
-            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Fundo preto */
+            color: #fff; /* Texto branco */
+        }
+        
+        /* Carrossel de Imagens estilo Instagram */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 375px;
+            overflow: hidden;
         }
 
-        /* Carrossel de Imagens */
-        .carousel-container {
-            max-width: 375px;
-            margin: auto;
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: calc(100% * 6); /* Para 6 imagens */
+            height: 375px;
+            border-radius: 10px;
         }
 
         .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 10px;
+        }
+
+        /* Indicadores */
+        .indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .indicator {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #FF0000; /* Cor do indicador ativo */
         }
 
         /* Nome em destaque */
         .name-title {
             font-size: 32px;
-            color: #FF0000;
-            font-family: 'Segoe Script', cursive;
+            color: #FF0000; /* Cor vermelha */
+            font-family: 'Segoe Script', cursive; /* Fonte delicada */
             font-weight: bold;
             text-align: center;
             margin-top: 20px;
         }
 
+        /* Texto Especial */
+        .special-text {
+            text-align: center;
+            margin: 20px 10px;
+            font-family: 'Segoe Script', cursive; /* Fonte delicada */
+            font-size: 18px;
+        }
+
         /* Contador de Tempo */
+        .counter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         .counter-item {
-            box-shadow: 0px 0px 8px #9400D3;
+            background-color: #000;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            width: 90%; /* Largura quase total da tela */
+            max-width: 320px; /* Limita a largura em telas maiores */
+            margin: 5px 0;
+            color: #fff;
+            box-shadow: 0px 0px 8px #9400D3; /* Sombra roxa neon */
         }
 
-        .indicator {
-            background-color: #ccc;
-            cursor: pointer;
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            display: inline-block;
+        .counter-item .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
         }
 
-        .active {
-            background-color: #FF0000;
+        .counter-item .label {
+            font-size: 14px;
+            color: #ccc;
+            text-transform: uppercase;
         }
     </style>
 </head>
-
 <body>
-    <div class="container text-center my-5">
-        <!-- Carrossel de Imagens -->
-        <div class="carousel-container mb-4">
-            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="1.jpg" class="d-block w-100" alt="Imagem 1 de vocês">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="2.jpg" class="d-block w-100" alt="Imagem 2 de vocês">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="3.jpg" class="d-block w-100" alt="Imagem 3 de vocês">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="4.jpg" class="d-block w-100" alt="Imagem 4 de vocês">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="5.jpg" class="d-block w-100" alt="Imagem 5 de vocês">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="6.jpg" class="d-block w-100" alt="Imagem 6 de vocês">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Anterior</span>
-                </a>
-                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Próxima</span>
-                </a>
-            </div>
+    
+    <!-- Carrossel de Imagens -->
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31.jpeg" alt="Imagem 1 de vocês">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31 (5).jpeg" alt="Imagem 2 de vocês">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31 (4).jpeg" alt="Imagem 3 de vocês">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31 (3).jpeg" alt="Imagem 4 de vocês">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31 (2).jpeg" alt="Imagem 5 de vocês">
+            <img src="WhatsApp Image 2024-10-25 at 15.58.31 (1).jpeg" alt="Imagem 6 de vocês">
         </div>
-
-        <!-- Nome em Destaque -->
-        <div class="name-title">Douglas & Manuella</div>
-
-        <!-- Texto Especial -->
-        <div class="special-text my-4">
-            <p>Desde que eu te vi, sabia que você seria a mulher da minha vida, e, a cada dia que passa, sinto que
-                estava certo. Meu amor, você me completa de um jeito único e me faz ser o melhor de mim. Ter você ao meu
-                lado é viver os melhores dias da minha vida, repletos de carinho, cumplicidade e do seu jeito doce que
-                tanto amo.
-            </p>
-            <p>
-                Quando olho para você, lembro o quanto sou abençoado por estar com alguém tão especial. Sei que, juntos,
-                temos o melhor dos caminhos: aquele onde nos apoiamos nos momentos difíceis, e onde damos risadas e
-                fazemos
-                planos, certos de que sempre estaremos ali um para o outro.
-            </p>
-            <p>
-                Você é tudo para mim, Manuella, e eu não poderia estar mais feliz por estar vivendo essa história ao seu
-                lado. Hoje, comemoramos esses três meses, mas quero que saiba que este é só o começo do "para sempre"
-                que
-                construímos, com fé, respeito e muito amor. Cada segundo ao seu lado é uma prova do quanto minha vida
-                faz
-                sentido com você. Amo você mais do que consigo expressar e mal posso esperar para continuar escrevendo
-                nosso
-                futuro, juntos.</p>
-        </div>
-
-        <!-- Contador de Tempo -->
-        <div class="row" id="timeTogether">
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="years">0</div>
-                    <div class="label text-muted">anos</div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="months">0</div>
-                    <div class="label text-muted">meses</div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="days">0</div>
-                    <div class="label text-muted">dias</div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="hours">0</div>
-                    <div class="label text-muted">horas</div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="minutes">0</div>
-                    <div class="label text-muted">minutos</div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 mb-3">
-                <div class="counter-item p-3">
-                    <div class="number h3" id="seconds">0</div>
-                    <div class="label text-muted">segundos</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Música -->
-        <audio controls autoplay loop>
-            <source src="Lady_Gaga__Bruno_Mars_-_Die_With_A_Smile__Official_Music_Video__[_YouConvert.net_].mp3"
-                type="audio/mpeg">
-            Seu navegador não suporta o elemento de áudio.
-        </audio>
+        <div class="indicators" id="indicators"></div>
     </div>
 
-    <!-- Bootstrap JS e dependências -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Nome em Destaque -->
+    <div class="name-title">Douglas & Manuella</div>
+
+    <!-- Texto Especial -->
+    <div class="special-text">
+        Desde que eu te vi, sabia que você seria a mulher da minha vida, e, a cada dia que passa, sinto que estava certo. Meu amor, você me completa de um jeito único e me faz ser o melhor de mim. Ter você ao meu lado é viver os melhores dias da minha vida, repletos de carinho, cumplicidade e do seu jeito doce que tanto amo.
+
+        Quando olho para você, lembro o quanto sou abençoado por estar com alguém tão especial. Sei que, juntos, temos o melhor dos caminhos: aquele onde nos apoiamos nos momentos difíceis, e onde damos risadas e fazemos planos, certos de que sempre estaremos ali um para o outro.
+
+        Você é tudo para mim, Manuella, e eu não poderia estar mais feliz por estar vivendo essa história ao seu lado. Hoje, comemoramos esses três meses, mas quero que saiba que este é só o começo do "para sempre" que construímos, com fé, respeito e muito amor. Cada segundo ao seu lado é uma prova do quanto minha vida faz sentido com você. Amo você mais do que consigo expressar e mal posso esperar para continuar escrevendo nosso futuro, juntos.
+    </div>
+
+    <!-- Contador de Tempo -->
+    <div class="counter" id="timeTogether">
+        <div class="counter-item">
+            <div class="number" id="years">0</div>
+            <div class="label">anos</div>
+        </div>
+        <div class="counter-item">
+            <div class="number" id="months">0</div>
+            <div class="label">meses</div>
+        </div>
+        <div class="counter-item">
+            <div class="number" id="days">0</div>
+            <div class="label">dias</div>
+        </div>
+        <div class="counter-item">
+            <div class="number" id="hours">0</div>
+            <div class="label">horas</div>
+        </div>
+        <div class="counter-item">
+            <div class="number" id="minutes">0</div>
+            <div class="label">minutos</div>
+        </div>
+        <div class="counter-item">
+            <div class="number" id="seconds">0</div>
+            <div class="label">segundos</div>
+        </div>
+    </div>
+
+    <!-- Música -->
+    <audio controls autoplay loop>
+        <source src="Lady_Gaga__Bruno_Mars_-_Die_With_A_Smile__Official_Music_Video__[_YouConvert.net_].mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
     <script>
+        // Carrossel de Imagens
+        const carousel = document.getElementById("carousel");
+        const indicatorsContainer = document.getElementById("indicators");
+        const totalImages = carousel.children.length;
+        let currentIndex = 0;
+
+        // Cria indicadores
+        for (let i = 0; i < totalImages; i++) {
+            const indicator = document.createElement("div");
+            indicator.classList.add("indicator");
+            indicator.addEventListener("click", () => {
+                currentIndex = i;
+                updateCarousel();
+            });
+            indicatorsContainer.appendChild(indicator);
+        }
+
+        // Atualiza o carrossel
+        function updateCarousel() {
+            const offset = -currentIndex * 100 / totalImages; // Calcula a posição
+            carousel.style.transform = `translateX(${offset}%)`;
+            updateIndicators();
+        }
+
+        // Atualiza os indicadores
+        function updateIndicators() {
+            const indicators = document.querySelectorAll(".indicator");
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle("active", index === currentIndex);
+            });
+        }
+
+        // Passa automaticamente as imagens
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateCarousel();
+        }, 5000); // Troca a imagem a cada 5 segundos
+
+        // Contador de Tempo Juntos com correção para duração variável dos meses
         function updateCounter() {
-            const startDate = new Date("2024-08-01T00:00:00");
+            const startDate = new Date("2024-08-01T00:00:00"); // Data exata de início do namoro
             const now = new Date();
-            const diff = now - startDate;
 
-            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
-            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            // Calcula a diferença entre as datas
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+            let hours = now.getHours() - startDate.getHours();
+            let minutes = now.getMinutes() - startDate.getMinutes();
+            let seconds = now.getSeconds() - startDate.getSeconds();
 
+            // Ajusta os valores quando houver negativos devido a diferentes dias no mês ou horas
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            if (days < 0) {
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+                months--;
+            }
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+
+            // Atualiza o conteúdo dos elementos do contador
             document.getElementById("years").textContent = years;
             document.getElementById("months").textContent = months;
             document.getElementById("days").textContent = days;
@@ -191,8 +256,8 @@
             document.getElementById("seconds").textContent = seconds;
         }
 
+        // Atualiza o contador a cada segundo
         setInterval(updateCounter, 1000);
     </script>
 </body>
-
 </html>
