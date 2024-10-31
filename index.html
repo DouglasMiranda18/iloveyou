@@ -13,8 +13,8 @@
             align-items: center;
             margin: 0;
             padding: 0;
-            background-color: #000; /* Fundo preto */
-            color: #fff; /* Texto branco */
+            background-color: #000;
+            color: #fff;
         }
         
         /* Carrossel de Imagens estilo Instagram */
@@ -57,14 +57,14 @@
         }
 
         .active {
-            background-color: #FF0000; /* Cor do indicador ativo */
+            background-color: #FF0000;
         }
 
         /* Nome em destaque */
         .name-title {
             font-size: 32px;
-            color: #FF0000; /* Cor vermelha */
-            font-family: 'Segoe Script', cursive; /* Fonte delicada */
+            color: #FF0000;
+            font-family: 'Segoe Script', cursive;
             font-weight: bold;
             text-align: center;
             margin-top: 20px;
@@ -74,7 +74,7 @@
         .special-text {
             text-align: center;
             margin: 20px 10px;
-            font-family: 'Segoe Script', cursive; /* Fonte delicada */
+            font-family: 'Segoe Script', cursive;
             font-size: 18px;
         }
 
@@ -91,11 +91,11 @@
             border-radius: 10px;
             padding: 10px;
             text-align: center;
-            width: 90%; /* Largura quase total da tela */
-            max-width: 320px; /* Limita a largura em telas maiores */
+            width: 90%;
+            max-width: 320px;
             margin: 5px 0;
             color: #fff;
-            box-shadow: 0px 0px 8px #9400D3; /* Sombra roxa neon */
+            box-shadow: 0px 0px 8px #9400D3;
         }
 
         .counter-item .number {
@@ -167,7 +167,7 @@
     </div>
 
     <!-- Música -->
-    <audio controls autoplay loop>
+    <audio id="background-music" autoplay loop muted>
         <source src="Lady_Gaga__Bruno_Mars_-_Die_With_A_Smile__Official_Music_Video__[_YouConvert.net_].mp3" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
@@ -179,7 +179,6 @@
         const totalImages = carousel.children.length;
         let currentIndex = 0;
 
-        // Cria indicadores
         for (let i = 0; i < totalImages; i++) {
             const indicator = document.createElement("div");
             indicator.classList.add("indicator");
@@ -190,14 +189,12 @@
             indicatorsContainer.appendChild(indicator);
         }
 
-        // Atualiza o carrossel
         function updateCarousel() {
-            const offset = -currentIndex * 100 / totalImages; // Calcula a posição
+            const offset = -currentIndex * 100 / totalImages;
             carousel.style.transform = `translateX(${offset}%)`;
             updateIndicators();
         }
 
-        // Atualiza os indicadores
         function updateIndicators() {
             const indicators = document.querySelectorAll(".indicator");
             indicators.forEach((indicator, index) => {
@@ -205,49 +202,24 @@
             });
         }
 
-        // Passa automaticamente as imagens
         setInterval(() => {
             currentIndex = (currentIndex + 1) % totalImages;
             updateCarousel();
-        }, 5000); // Troca a imagem a cada 5 segundos
+        }, 5000);
 
-        // Contador de Tempo Juntos com correção para duração variável dos meses
+        // Contador de Tempo Juntos
         function updateCounter() {
-            const startDate = new Date("2024-08-01T00:00:00"); // Data exata de início do namoro
+            const startDate = new Date("2024-08-01T00:00:00");
             const now = new Date();
+            const diff = now - startDate;
 
-            // Calcula a diferença entre as datas
-            let years = now.getFullYear() - startDate.getFullYear();
-            let months = now.getMonth() - startDate.getMonth();
-            let days = now.getDate() - startDate.getDate();
-            let hours = now.getHours() - startDate.getHours();
-            let minutes = now.getMinutes() - startDate.getMinutes();
-            let seconds = now.getSeconds() - startDate.getSeconds();
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.4375)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            // Ajusta os valores quando houver negativos devido a diferentes dias no mês ou horas
-            if (seconds < 0) {
-                seconds += 60;
-                minutes--;
-            }
-            if (minutes < 0) {
-                minutes += 60;
-                hours--;
-            }
-            if (hours < 0) {
-                hours += 24;
-                days--;
-            }
-            if (days < 0) {
-                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-                days += prevMonth.getDate();
-                months--;
-            }
-            if (months < 0) {
-                months += 12;
-                years--;
-            }
-
-            // Atualiza o conteúdo dos elementos do contador
             document.getElementById("years").textContent = years;
             document.getElementById("months").textContent = months;
             document.getElementById("days").textContent = days;
@@ -255,9 +227,15 @@
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
         }
-
-        // Atualiza o contador a cada segundo
         setInterval(updateCounter, 1000);
+
+        // Forçar a música a tocar ao carregar
+        window.addEventListener("load", function() {
+            const audio = document.getElementById("background-music");
+            audio.muted = false;
+            audio.play();
+        });
     </script>
+
 </body>
 </html>
